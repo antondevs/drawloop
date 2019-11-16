@@ -1,0 +1,9 @@
+[submodule "libs/nanovg"]
+	path = libs/nanovg
+	url = https://github.com/memononen/nanovg.git
+[submodule "libs/nanosvg"]
+	path = libs/nanosvg
+	url = https://github.com/memononen/nanosvg.git
+[submodule "libs/metalvg"]
+	path = libs/metalvg
+	url = https://github.com/ollix/MetalNanoVG.git
