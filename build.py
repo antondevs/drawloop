@@ -31,8 +31,6 @@ def showMenu(title,options):
 
 platform = showMenu("Select platform:", { 1:"Windows", 2:"Linux", 3:"MacOS", 4:"iOS", 5:"Android" })
 buildType = showMenu("Build type:", { 1:"Release", 2:"Debug" })
-resultType = showMenu("Result type:", { 1:"Project", 2:"Package" })
-
 buildConfig = "-DCMAKE_BUILD_TYPE=Release" if buildType == 1 else "-DCMAKE_BUILD_TYPE=Debug"
 
 if platform == 1:
@@ -41,12 +39,10 @@ elif platform == 2:
     print platform
 elif platform == 3:
     prepareBuildDir("macos")
-    libConfig = "-G Xcode" if resultType == 1 else "&& make"
-    executeShell("cmake ../.. " + libConfig)
+    executeShell("cmake ../.. {} && make".format(buildConfig))
 elif platform == 4:
     prepareBuildDir("ios")
-    libConfig = "-G Xcode" if resultType == 1 else "&& make"
-    executeShell("cmake ../.. -DCMAKE_TOOLCHAIN_FILE=../../toolchain/ios.toolchain.cmake -DPLATFORM=OS " + libConfig)
+    executeShell("cmake ../.. -DCMAKE_TOOLCHAIN_FILE=../../toolchain/ios.toolchain.cmake -DPLATFORM=OS {} && make".format(buildConfig))
 elif platform == 5:
     abiList = ["x86", "x86_64", "armeabi-v7a", "arm64-v8a"]
     for abi in abiList:

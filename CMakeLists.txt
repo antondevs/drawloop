@@ -3,10 +3,9 @@ cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
 set(PROJECTNAME drawloop)
 project(${PROJECTNAME})
 
-set(CMAKE_LIBRARY_PATH /lib)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-message(STATUS "C++14 support has been enabled by default.")
+message(STATUS "C++11 support has been enabled by default.")
 
 file(GLOB LIB_NVG "libs/nanovg/src/*.*")
 file(GLOB LIB_NVGSVG "libs/nanosvg/src/*.h")
