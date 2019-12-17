@@ -22,6 +22,7 @@ struct StringComparer
 
 struct RenderContext
 {
+    void *userData;
     NVGcontext *nvg;
     int screenWidth;
     int screenHeight;
@@ -33,6 +34,7 @@ struct RenderContext
         nvg = nullptr;
         screenWidth = 0;
         screenHeight = 0;
+        userData = nullptr;
     }
 };
 

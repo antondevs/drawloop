@@ -9,7 +9,6 @@ message(STATUS "C++11 support has been enabled by default.")
 
 file(GLOB LIB_NVG "libs/nanovg/src/*.*")
 file(GLOB LIB_NVGSVG "libs/nanosvg/src/*.h")
-file(GLOB LIB_LUA "libs/lua/src/*.*")
 
 if( ANDROID )
 	file(GLOB LIB_NVG_EXT "")
@@ -22,7 +21,6 @@ include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/libs/metalvg/src
 	${CMAKE_CURRENT_SOURCE_DIR}/libs/nanovg/src
 	${CMAKE_CURRENT_SOURCE_DIR}/libs/nanosvg/src
-	${CMAKE_CURRENT_SOURCE_DIR}/libs/lua/src
 )
 
 file(
@@ -38,9 +36,6 @@ foreach(source IN LISTS SRCS)
     source_group("${source_path_msvc}" FILES "${source}")
 endforeach()  
 message(STATUS "Tree reorganized")
-
-list(REMOVE_ITEM SRCS "sources/lualib/src/lua.c")
-list(REMOVE_ITEM SRCS "sources/lualib/src/luac.c")
 
 set(PROJECT_FILES ${SRCS} ${LIB_NVG} ${LIB_NVGSVG} ${LIB_LUA})
 add_library(${PROJECTNAME} ${SRCS} ${FILES_SRC} ${FILES_HEADERS} ${LIB_NVG} ${LIB_NVG_EXT} ${LIB_NVGSVG} ${LIB_LUA})

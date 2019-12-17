@@ -9,7 +9,6 @@ void CleanContext(RenderContext **context)
 {
     if (*context)
     {
-        
         delete *context;
         *context = nullptr;
     }

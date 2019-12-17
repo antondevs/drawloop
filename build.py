@@ -29,7 +29,14 @@ def showMenu(title,options):
     
     return result
 
-platform = showMenu("Select platform:", { 1:"Windows", 2:"Linux", 3:"MacOS", 4:"iOS", 5:"Android" })
+androidSdkPath = "~/Library/Android/sdk"
+platform = showMenu("Target:", { 1:"Windows", 2:"Linux", 3:"MacOS", 4:"iOS", 5:"Android", 6:"Only XCode project" })
+
+if platform == 6:
+    prepareBuildDir("xcode")
+    executeShell("cmake ../.. -G Xcode")
+    sys.exit()
+
 buildType = showMenu("Build type:", { 1:"Release", 2:"Debug" })
 buildConfig = "-DCMAKE_BUILD_TYPE=Release" if buildType == 1 else "-DCMAKE_BUILD_TYPE=Debug"
 
@@ -45,6 +52,9 @@ elif platform == 4:
     executeShell("cmake ../.. -DCMAKE_TOOLCHAIN_FILE=../../toolchain/ios.toolchain.cmake -DPLATFORM=OS {} && make".format(buildConfig))
 elif platform == 5:
     abiList = ["x86", "x86_64", "armeabi-v7a", "arm64-v8a"]
+    ndkPath = androidSdkPath + "/ndk/20.1.5948944"
+    currentDir = os.getcwd()
     for abi in abiList:
+        os.chdir(currentDir)
         prepareBuildDir("android/" + abi)
-        executeShell("cmake ../../.. -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DANDROID_ABI=\"" + abi + "\"")
+        executeShell("cmake ../../.. -DCMAKE_TOOLCHAIN_FILE=" + ndkPath + "/build/cmake/android.toolchain.cmake -DANDROID_ABI=\"" + abi + "\" && make")
