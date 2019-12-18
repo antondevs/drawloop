@@ -26,7 +26,6 @@ def showMenu(title,options):
     if not options.has_key(result):
         print "ERROR: Unknown option"
         sys.exit()
-    
     return result
 
 androidSdkPath = "~/Library/Android/sdk"
@@ -43,7 +42,8 @@ buildConfig = "-DCMAKE_BUILD_TYPE=Release" if buildType == 1 else "-DCMAKE_BUILD
 if platform == 1:
     print platform
 elif platform == 2:
-    print platform
+    prepareBuildDir("linux")
+    executeShell("cmake ../.. {} && make".format(buildConfig))
 elif platform == 3:
     prepareBuildDir("macos")
     executeShell("cmake ../.. {} && make".format(buildConfig))
