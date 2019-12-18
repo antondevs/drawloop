@@ -12,14 +12,12 @@ Application::~Application()
 
 void Application::onInit()
 {
-    Engine::onInit();
-    
     int size;
     char *buffer;
     
-    if (LoadFile("main.lua", &buffer, size))
+    if (LoadFile("GreatVibes-Regular.ttf", &buffer, size))
     {
-        bool res = loadScript(buffer, size, "main");
+        LoadFont(_context, "GreatVibes", buffer, size);
         free(buffer);
     }
 }
@@ -30,10 +28,15 @@ void Application::onDraw()
     float h = _context->screenHeight;
 
     nvgBeginFrame(_context->nvg, w, h, h > w ? w / h : h / w);
-    runScript("main");
     
-   // nvgFillColor(_context->nvg, nvgRGBA(55,192,0,255));
-//    nvgFill(_context->nvg);
+    const char *text = "Hello, DrawLoop!";
+    nvgFontFaceId(_context->nvg, 0);
+    nvgFontSize(_context->nvg, 50);
+    nvgText(_context->nvg, 50, 50, text, nullptr);
+    
+    //nvgCircle(_context->nvg, 300, 300, 250);
+    //nvgFillColor(_context->nvg, nvgRGBA(55,192,0,255));
+    //nvgFill(_context->nvg);
     nvgEndFrame(_context->nvg);
 }
 

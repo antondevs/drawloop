@@ -38,6 +38,7 @@ void Engine::onTouchUp(int x, int y)
 void Engine::updateContext(NVGcontext *nvgContext)
 {
     _context->nvg = nvgContext;
+    onInit();
 }
 
 void Engine::updateScreenSize(int width, int height)

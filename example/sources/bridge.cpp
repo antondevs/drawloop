@@ -7,7 +7,6 @@ std::unique_ptr<Application> application;
 void dlCreateApplication(void)
 {
     application = std::unique_ptr<Application>(new Application);
-    application->onInit();
 }
 
 void dlDrawFrame(void)

@@ -1,3 +1,4 @@
+#define NANOSVG_IMPLEMENTATION
 #include "renderlayer.hpp"
 
 RenderContext *CreateContext()
@@ -36,14 +37,14 @@ int FindResource(RenderContext *context, std::string name)
 
 int LoadFont(RenderContext *context, std::string name, char *buffer, int size)
 {
-    int resId = nvgCreateImageMem(context->nvg, 0, (unsigned char *) buffer, size);
+    int resId = nvgCreateFontMem(context->nvg, name.c_str(), (unsigned char *) buffer, size, 1);
     context->resources.insert(std::make_pair(name, resId));
     return resId;
 }
 
 int LoadImage(RenderContext *context, std::string name, char *buffer, int size)
 {
-    int resId = nvgCreateFontMem(context->nvg, 0, (unsigned char *) buffer, size, 1);
+    int resId = nvgCreateImageMem(context->nvg, 0, (unsigned char *) buffer, size);
     context->resources.insert(std::make_pair(name, resId));
     return resId;
 }
